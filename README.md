@@ -14,21 +14,22 @@ This project is an end-to-end test automation framework for the SauceDemo e-comm
 ## Project Structure
 
 ```text
-pages/
-  LoginPage.ts
-  InventoryPage.ts
-  CartPage.ts
-  CheckoutPage.ts
-  CheckoutOverviewPage.ts
-  CompletePage.ts
-
-tests/
-  checkout.spec.ts
-
-.github/
-  workflows/
-    playwright.yml
-```
+saucedemo-playwright-ts/
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
+├── pages/
+│   ├── LoginPage.ts
+│   ├── InventoryPage.ts
+│   ├── CartPage.ts
+│   ├── CheckoutPage.ts
+│   ├── CheckoutOverviewPage.ts
+│   └── CompletePage.ts
+├── tests/
+│   └── checkout.spec.ts
+├── package.json
+├── playwright.config.ts
+└── README.md
 
 ## Test Coverage
 
