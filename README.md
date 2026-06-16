@@ -1,63 +1,100 @@
-# SauceDemo Playwright TypeScript Automation
+# Playwright TypeScript QA Automation Portfolio
 
-This project is an end-to-end test automation framework for the SauceDemo e-commerce website using Playwright, TypeScript, and the Page Object Model (POM) design pattern.
+This project is a QA Automation portfolio built with Playwright and TypeScript. It includes both UI and API automated tests, follows the Page Object Model (POM) design pattern, and demonstrates end-to-end, API, and CRUD testing practices.
 
 ## Tech Stack
 
-- Playwright
-- TypeScript
-- Node.js
-- GitHub Actions (CI)
-- Page Object Model
-- VS Code
+* Playwright
+* TypeScript
+* Node.js
+* GitHub Actions (CI)
+* REST API Testing
+* Page Object Model (POM)
+* VS Code
 
 ## Project Structure
 
 ```text
-saucedemo-playwright-ts/
-├── .github/
-│   └── workflows/
-│       └── playwright.yml
-├── pages/
-│   ├── LoginPage.ts
-│   ├── InventoryPage.ts
-│   ├── CartPage.ts
-│   ├── CheckoutPage.ts
-│   ├── CheckoutOverviewPage.ts
-│   └── CompletePage.ts
-├── tests/
-│   └── checkout.spec.ts
-├── package.json
-├── playwright.config.ts
-└── README.md
+pages/
+  LoginPage.ts
+  InventoryPage.ts
+  CartPage.ts
+  CheckoutPage.ts
+  CheckoutOverviewPage.ts
+  CompletePage.ts
 
-## Test Coverage
+tests/
+  checkout.spec.ts
+  api/
+    booking-api.spec.ts
 
-### Positive Scenario
+.github/
+  workflows/
+    playwright.yml
+```
 
-- Login with valid credentials
-- Add Sauce Labs Backpack to cart
-- Verify cart badge
-- Open cart
-- Verify item name and quantity
-- Proceed to checkout
-- Fill checkout information
-- Complete order
-- Verify successful order confirmation
-- Return to inventory page
+## UI Test Coverage
 
-### Negative Scenario
+### Positive E2E Checkout Flow
 
-- Login with invalid password
-- Verify error message is displayed
+* Login with valid credentials
+* Add Sauce Labs Backpack to cart
+* Verify cart badge
+* Open cart
+* Verify item details
+* Complete checkout process
+* Verify successful order confirmation
 
-## How to Install
+### Negative Login Scenario
+
+* Login with invalid password
+* Verify error message
+
+## API Test Coverage
+
+### Restful Booker API
+
+#### GET
+
+* Get all booking IDs
+* Get booking by ID
+
+#### POST
+
+* Create booking
+* Create authentication token
+
+#### PUT
+
+* Update entire booking
+
+#### PATCH
+
+* Partially update booking
+
+#### DELETE
+
+* Delete booking
+* Verify deleted booking returns 404
+
+## Framework Features
+
+* API helper functions
+* Reusable authentication helper
+* Reusable booking creation helper
+* Centralized BASE_URL configuration
+* TypeScript support
+* Playwright Test Runner
+* HTML reporting
+* CI/CD integration with GitHub Actions
+
+## Installation
 
 ```bash
 npm install
 ```
 
-## How to Run Tests
+## Run Tests
 
 Run all tests:
 
@@ -65,49 +102,60 @@ Run all tests:
 npx playwright test
 ```
 
-Run tests in headed mode:
-
-```bash
-npx playwright test --headed
-```
-
-Run a specific test file:
+Run UI tests:
 
 ```bash
 npx playwright test tests/checkout.spec.ts
 ```
 
-## How to View HTML Report
+Run API tests:
+
+```bash
+npx playwright test tests/api/booking-api.spec.ts
+```
+
+Run headed mode:
+
+```bash
+npx playwright test --headed
+```
+
+## View HTML Report
 
 ```bash
 npx playwright show-report
 ```
 
-## Continuous Integration (CI)
+## Continuous Integration
 
-This project uses GitHub Actions to automatically run Playwright tests on every push and pull request.
+GitHub Actions automatically:
 
-Workflow configuration:
+* Installs dependencies
+* Installs Playwright browsers
+* Executes tests
+* Uploads HTML reports
+
+Workflow file:
 
 ```text
 .github/workflows/playwright.yml
 ```
 
-CI pipeline performs the following steps:
+## Design Patterns
 
-- Checkout repository
-- Install Node.js
-- Install project dependencies
-- Install Playwright browsers
-- Execute Playwright tests
-- Upload Playwright HTML report as an artifact
+### Page Object Model (POM)
 
-## Design Pattern
+UI tests use the Page Object Model to separate page actions and locators from test logic.
 
-This project follows the Page Object Model (POM) design pattern.
+### Helper Functions
 
-Page Objects keep locators, actions, and assertions separate from test logic. This makes tests more maintainable, reusable, and easier to read.
+API tests use reusable helper functions for:
+
+* Authentication token creation
+* Booking creation
+
+This reduces duplicated code and improves maintainability.
 
 ## Author
 
-Created as part of a QA Automation portfolio project.
+Created as part of a QA Automation portfolio project using Playwright and TypeScript.
