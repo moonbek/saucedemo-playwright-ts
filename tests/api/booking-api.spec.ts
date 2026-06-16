@@ -309,8 +309,75 @@ expect(updateResponseBody).toEqual(
     })
   );
 })
+
+
+test('PATCH partially update booking', async ({ request }) => {
+  const newBooking = {
+    firstname: 'Jim',
+    lastname: 'Brown',
+    totalprice: 111,
+    depositpaid: true,
+    bookingdates: {
+      checkin: '2018-01-01',
+      checkout: '2019-01-01',
+    },
+    additionalneeds: 'Breakfast',
+  };
+
+  const bookingId = await createBooking(request, newBooking);
+  const authToken = await createAuthToken(request);
+
+  const partialUpdateData = {
+    depositpaid: false,
+  };
+
+  const patchResponse = await request.patch(
+    `${BASE_URL}/booking/${bookingId}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Cookie: `token=${authToken}`,
+      },
+      data: partialUpdateData,
+    }
+  );
+
+  expect(patchResponse.status()).toBe(200);
+
+  const patchResponseBody = await patchResponse.json();
+
+  expect(patchResponseBody.depositpaid).toBe(partialUpdateData.depositpaid);
+});
   
 
+test('DELETE booking', async ({ request }) => {
+  const newBooking = {
+    firstname: 'Jim',
+    lastname: 'Brown',
+    totalprice: 111,
+    depositpaid: true,
+    bookingdates: {
+      checkin: '2018-01-01',
+      checkout: '2019-01-01',
+    },
+    additionalneeds: 'Breakfast',
+  };
+
+  const bookingId = await createBooking(request, newBooking);
+  const authToken = await createAuthToken(request);
+
+  const deleteResponse = await request.delete(
+    `${BASE_URL}/booking/${bookingId}`,
+    {
+      headers: {
+        Cookie: `token=${authToken}`,
+      },
+    }
+  );
+
+  expect(deleteResponse.status()).toBe(201);
+});
 
 
 
